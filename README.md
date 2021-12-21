@@ -12,11 +12,19 @@ enable automatic update of SageMaker's models endpoint in the event of modifying
 This is achieved by utilizing S3's' event notifications. On updating the target S3 bucket objects, 
 an event is emitted that is handled by a lambda function which updates the deployed SageMaker endpoint.
 
+#### Design
+
+This resource implements architecture showed in the following UML diagram:
+
+![Architecture diagram](images/architecture.svg)
+
 Endpoint update is done via `boto3`'s function `update_endpoint()` that requires a new 
 configuration to be provided. Instead of creating a new instance of it each time, two identical 
 configurations (A & B) with different names are created only once, during the deployment. Each 
 `update_endpoint()` call effectively swaps them together, allowing the endpoint to be refreshed with new 
-up-to-date source model(-s) data.
+up-to-date source model(-s) data. This can be seen in the UML activity diagram below:
+
+![Activity diagram](images/activity-diagram.svg)
 
 ### Remarks
 

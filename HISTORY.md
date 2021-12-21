@@ -1,5 +1,9 @@
 # Release history
 
+### 0.0.4
+
+- Updated README with architecture & activity diagrams.
+
 ### 0.0.3
 
 - Updated README.
